@@ -1,5 +1,7 @@
 # notraker
 
+[![ci](https://github.com/GuillaumeYves/notraker/actions/workflows/ci.yml/badge.svg)](https://github.com/GuillaumeYves/notraker/actions/workflows/ci.yml)
+
 A small background daemon that shields your machine from web and email trackers.
 
 It runs a local DNS proxy. Lookups for known tracker domains get a dead answer,
@@ -16,9 +18,16 @@ notraker on 127.0.0.1:53
         `-- anything else   ->  forwarded to 1.1.1.1 / 9.9.9.9
 ```
 
-## Build
+## Install
 
-Needs Go 1.22 or newer.
+Grab a prebuilt binary from the [releases page](https://github.com/GuillaumeYves/notraker/releases),
+or install with Go:
+
+```
+go install github.com/GuillaumeYves/notraker/cmd/notraker@latest
+```
+
+To build from source:
 
 ```
 make build          # or: go build ./cmd/notraker

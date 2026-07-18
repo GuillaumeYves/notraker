@@ -7,6 +7,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"runtime/debug"
 	"strconv"
 	"strings"
 	"time"
@@ -17,8 +18,18 @@ import (
 	"github.com/GuillaumeYves/notraker/internal/sysdns"
 )
 
-// version is stamped at build time, see the Makefile.
+// version is stamped at build time, see the Makefile. Builds made
+// with go install carry the tag in build info instead, use that.
 var version = "dev"
+
+func init() {
+	if version != "dev" {
+		return
+	}
+	if bi, ok := debug.ReadBuildInfo(); ok && bi.Main.Version != "" && bi.Main.Version != "(devel)" {
+		version = bi.Main.Version
+	}
+}
 
 const usage = `notraker, a local shield against web and email trackers
 
